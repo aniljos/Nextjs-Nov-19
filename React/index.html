@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.2/babel.js" integrity="sha512-rJN+AlfLoCWsFIsH9XPijK7EeWpVjteVso4ZSuLCfEXhUlEMZ/4KGBpJdibxbaFgYvruWmbKvzp1v88Xu33/2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>React</title>
+</head>
+<body>
+    <h4>React Applicaton</h4>
+    <div id="app1"></div>
+    <div id="app2"></div>
+    <div id="app3"></div>
+    <div id="app4"></div>
+
+    <script type="text/babel">
+
+        // create an element: <div>This is a react element</div>
+        var element1 = React.createElement("div", null, "This is a react element");
+        // append the element as a child of the dic with id:app1
+        ReactDOM.createRoot(document.getElementById("app1")).render(element1);
+
+        // create an element: <div><h4>This is a react element with an inner element</h4></div>
+        //var element2 = React.createElement("div", null, "<h4>This is a react element with an inner element</h4>");
+        var element2 = React.createElement("div", null, 
+                            React.createElement("h4", null, "This is a react element with an inner element"));
+        // append the element as a child of the div with id:app2
+        ReactDOM.createRoot(document.getElementById("app2")).render(element2);
+
+        //JSX
+        // create an element: <div><h4>This is JSX</h4></div>
+        // append the element as a child of the div with id:app3
+        ReactDOM.createRoot(document.getElementById("app3")).render(<div><h4>This is JSX</h4></div>);
+
+        //Component(function/class)
+        function MyComponent(){
+            //return the view/presentation(JSX)
+            return (
+                <div>
+                    <h4>MyComponent</h4>
+                    <p>This is a simple component</p>
+                </div>
+            );
+        }
+        ReactDOM.createRoot(document.getElementById("app4")).render(<MyComponent/>);
+
+
+
+    </script>
+</body>
+</html>
