@@ -1,0 +1,83 @@
+Introduction: https://forms.gle/XR6KErVjTDBQdcgo6
+
+React CDN: https://legacy.reactjs.org/docs/cdn-links.html
+
+Babel Standalone: https://cdnjs.com/libraries/babel-standalone
+
+nextjs version: 14.2.18
+
+
+React Libraries
+	: Repository: npm, yarn, pnpm
+	: CDN 
+	
+Next.js project files
+
+1. package.json: npm configuration files	
+			dependencies(dev/prod), scripts, project metadata
+2. node_modules: All dependencies are installed here
+3. tsconfig.json: Typescript config 
+			transpiles typescript to javascript, jsx to javascript
+4. next.config.mjs: Nextjs conf file
+			API routes configuration
+			MFE
+5. src: optional folder for source code
+6. src/app: App Router
+7  src/pages: Pages Router
+8. global.css: shared css
+9. layout.tsx: 
+		Defines the layout of the app
+		This is the first component to be render(root component)
+10. page.tsx: The page to displayed on the root path(http://localhost:3000/)
+
+
+Components
+
+1. functional or class: Recommended to functional
+2. React 18: 2 types of components: Client & Server
+		Server componenet introduced with React 18
+		from next 13 with App Router, the default is server componenets
+		To create client componenets include the 'use client' directive in the componenet file
+
+
+Component props
+
+1. Similar to HTML attribute: <input type="text" placeholder="Name"/>, <Message text="Hello Next.js" color="red"/>
+2. props enbales componenet to be reusebale.
+3. When props change the component is rerendered.
+
+Component State
+
+1. State is always internal
+2. State change trigger a component rerendered
+3. State change is async
+4. State changes are batched
+		counter: 5
+		setCounter(counter + 1); => setCounter(6)
+        setCounter(counter + 1); => setCounter(6)
+		
+		setCounter(prevCounter => prevCounter + 1); => setCounter(invoke the callback) => 5 => 6
+        setCounter(prevCounter => prevCounter + 1); => setCounter(invoke the callback) => 6 => 7
+5. set method: signature set(updatedValue) and set(callback)=> callback(prevValue => return the modifed value)
+		
+
+Event Handling
+
+HTML: <button onclick="foo()"></button>
+
+React: <button onClick={foo}></button>
+
+
+useEffect Hook
+ useEffect(callback, [list of dependencies]);
+ 
+ 1. Component mounts
+		 - useEffect(callback, []): dependency array as empty
+		 - API Calls on component mounted
+		 - DOM initialization
+		 - Starting any polling(timers)
+
+
+
+
+		

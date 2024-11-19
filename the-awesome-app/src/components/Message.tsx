@@ -1,10 +1,21 @@
+'use client';
+
+import { useEffect } from "react";
+
 type MessageProps = {
     text: string,
     color?: string
 }
 
 function Message(props: MessageProps){
+  
     
+    useEffect(() => {
+
+        console.log("Message Component: use effect on component mount");
+
+    }, [])
+
     const myjsx = (
         <p>Hello</p>
     );
