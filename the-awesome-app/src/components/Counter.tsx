@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import Message from "./Message";
 
 type CounterProps = {
@@ -15,7 +15,9 @@ function Counter(props: CounterProps){
     // const counter = arr[0];
     // const setCounter = arr[1];
 
-
+    useEffect(() => {
+        console.log("Counter: useEffect on counter update", counter);
+    }, [counter])
 
     function inc(evt: MouseEvent<HTMLButtonElement> ){
         console.log("in inc", evt);
@@ -23,7 +25,7 @@ function Counter(props: CounterProps){
         //setCounter(counter + 1);
         setCounter(prevCounter => prevCounter + 1);
        // setCounter(prevCounter => prevCounter + 1);
-        console.log("counter", counter);
+        //console.log("counter", counter);
     }
 
     function handleChange(evt: ChangeEvent<HTMLInputElement>){

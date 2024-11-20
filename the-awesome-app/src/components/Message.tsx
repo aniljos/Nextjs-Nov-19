@@ -14,6 +14,11 @@ function Message(props: MessageProps){
 
         console.log("Message Component: use effect on component mount");
 
+        return () => {
+            
+            console.log("Message Component: use effect on component unmount");
+        }
+
     }, [])
 
     const myjsx = (

@@ -1,8 +1,12 @@
 Introduction: https://forms.gle/XR6KErVjTDBQdcgo6
+Quiz 1: https://forms.gle/ZkTzzJdvwHHbSRML7
 
 React CDN: https://legacy.reactjs.org/docs/cdn-links.html
 
-Babel Standalone: https://cdnjs.com/libraries/babel-standalone
+Babel Standalone: https://cdnjs.com/libraries/babel-
+
+Git Repository for Mock API: https://github.com/aniljos/REST-API-Mock
+Git Repository for Class work: https://github.com/aniljos/Nextjs-Nov-19
 
 nextjs version: 14.2.18
 
@@ -72,10 +76,17 @@ useEffect Hook
  useEffect(callback, [list of dependencies]);
  
  1. Component mounts
-		 - useEffect(callback, []): dependency array as empty
+		 - useEffect(setup, []): dependency array as empty
 		 - API Calls on component mounted
-		 - DOM initialization
+		 - DOM initialization(registered for window/document events)
 		 - Starting any polling(timers)
+ 2. Component unmount
+		- return a callback from the setup method of the component mount	
+		- Cancel the API call 
+		- unregister for window/document events
+		- Cancel polling(timers)
+ 3. Component 
+		
 
 
 
