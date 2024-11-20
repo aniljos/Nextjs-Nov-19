@@ -50,6 +50,10 @@ Component props
 2. props enbales componenet to be reusebale.
 3. When props change the component is rerendered.
 
+<Message text="Hello Next.js" color="red">
+	<p>This is some content</p>       ====> props.children
+</Message>
+
 Component State
 
 1. State is always internal
@@ -63,6 +67,8 @@ Component State
 		setCounter(prevCounter => prevCounter + 1); => setCounter(invoke the callback) => 5 => 6
         setCounter(prevCounter => prevCounter + 1); => setCounter(invoke the callback) => 6 => 7
 5. set method: signature set(updatedValue) and set(callback)=> callback(prevValue => return the modifed value)
+6. state has to be treated as immutable
+		change state: create a copy of the state, makes changes to the copy, setState with the copy
 		
 
 Event Handling
@@ -85,10 +91,81 @@ useEffect Hook
 		- Cancel the API call 
 		- unregister for window/document events
 		- Cancel polling(timers)
- 3. Component 
+ 3. Component update
+        - called on state/props changes
+		- useEffect(setup, []): dependency array is non-empty
+		- setState is async, if logic to be executed after the state/props changes
 		
 
 
-
-
+Routing(navigation between the views)
+	- Single page application
+	- Intergrates with browser history
+	- Client navigation
+	
+	- In react, we have no api for routing
+	- Use 3rd librariee for routing
+	- When using Nextjs, nextjs has a routing apis
+	- Otherwise react-router library
+	
+useRef
+	- Hook, thats a mutatable reference
+	
+Form
+	-get or set the value of any form field(input, radio, checkbox, textarea, select)
+			-controlled input : bind the control to a state(useState hook), set te value attribute and handle onchange event	
+			-uncontrolled input : useRef hook: get the value or set the value
+			- recommened to use the controlled input
+	
+	
+	
+axios
+	-library based on XMLHttpRequest object
+	- Promise based => resolve or reject
+				- based on status code
+					-success: 100, 200, 300
+					- error: 400, 500
+	-async & await 
+			- Async code can a written like syncronous code
+			- works with promise
 		
+CSS
+	html style ==> inline styles  <div style="color: blue, font: ">
+	html class ==> reuseable css class
+	
+
+Nextjs routing
+
+	-Dynamic routes: The folder name is [nameoftheDynamicRoute] is the route folder
+	
+Edit Product(Assigment)
+
+1. We have the product id(params)
+2. Fetch the product form the backend: GET http://localhost:9000/products/[id]
+3. Bind the product(fetched) to the input fields: use controlled inputs
+4. On the click of the save: save to the server: PUT http://localhost:9000/products/[id] product
+		if the update is success: route back to the /products page
+		if update failed: display an error message
+5. On the click of cancel, route to the /products page
+
+
+Client Session
+
+	HTML5 
+		LocalStorage : persistent
+		SessionStorage : session(non-persistent)
+	
+	React- Memory
+		Redux
+		React Context
+
+Redux
+	Action : Object
+		- {type: "save_token", token: "abcd"}
+		- {type: "clear_token"}
+	Reducer: Function
+		- configured with the store
+		- receives the action, based on the action updated the store
+		
+react-redux(intgration lib)
+	Provider component: integrates the store to the react application
