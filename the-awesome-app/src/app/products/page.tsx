@@ -3,6 +3,7 @@ import { Product } from "@/model/Product";
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from './page.module.css';
+import { useRouter } from "next/navigation";
 
 const baseUrl = "http://localhost:9000/products";
 export default function ListProductsPage() {
@@ -13,6 +14,7 @@ export default function ListProductsPage() {
         fetchProducts()
 
     }, [])
+    const router = useRouter();
 
     async function fetchProducts() {
 
@@ -35,13 +37,28 @@ export default function ListProductsPage() {
             
             const url = `${baseUrl}/${product.id}`;
             await axios.delete(url);
-            await fetchProducts();
+            //await fetchProducts();
+            //copy of products
+            const copy_of_products = [...products];
+            // update the copy
+            const index = copy_of_products.findIndex(item => item.id === product.id);
+            if(index !== -1){
+                copy_of_products.splice(index, 1);
+            }
+            // set state with the copy
+            setProducts(copy_of_products);
+
             alert("record deleted: " + product.id);
 
         } catch  {
             alert("failed to delete record: " + product.id);
         }
 
+    }
+
+    function editProduct(product: Product){
+
+        router.push("/products/" + product.id);
     }
 
     return (
@@ -57,7 +74,7 @@ export default function ListProductsPage() {
                             <p>Price: {product.price}</p>
                             <div>
                                 <button className="btn btn-warning" onClick={() => {deleteProduct(product)}}>Delete</button>&nbsp;
-                                <button className="btn btn-info">Edit</button>
+                                <button className="btn btn-info" onClick={() => editProduct(product)}>Edit</button>
                             </div>
                         </div>
                     )
