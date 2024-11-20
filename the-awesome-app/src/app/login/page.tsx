@@ -1,5 +1,9 @@
 'use client'
 import { useEffect, useRef, useState } from "react";
+import axios from 'axios';
+import { useRouter } from "next/navigation";
+
+
 
 function LoginPage(){
 
@@ -8,6 +12,7 @@ function LoginPage(){
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const router = useRouter();
 
     useEffect(() => {
 
@@ -15,11 +20,33 @@ function LoginPage(){
 
     }, [])
 
-    function handleSignin(){
+    async function handleSignin(){
 
         if(name && password){
             //API call to validate the credentials
             setErrorMessage("");
+            const loginUrl = "http://localhost:9000/login";
+            // axios
+            //     .post(loginUrl, {name, password})
+            //     .then((response) => {
+            //         console.log("response", response);
+            //     }, (errorResponse) => {
+
+            //         console.log("errorResponse", errorResponse);
+            //     })
+
+            try {
+                
+                const response = await axios.post(loginUrl, {name, password});
+                console.log("response", response);
+                router.push("/");
+
+            } catch (errorResponse) {
+                console.log("errorResponse", errorResponse);
+                setErrorMessage("Invalid credentials");
+            }
+
+
         }
         else{
 
