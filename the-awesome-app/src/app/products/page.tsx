@@ -1,18 +1,24 @@
 'use client'
 import { Product } from "@/model/Product";
 import axios from "axios"
-import { useEffect, useState } from "react"
-import styles from './page.module.css';
+import { useCallback, useEffect, useMemo, useState } from "react"
+
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { AppState } from "@/state/redux/store";
+import ProductView from "./ProductView";
+import { useTitle } from "@/hooks/useTitle";
 
-//const baseUrl = "http://localhost:9000/products";
-const baseUrl = "http://localhost:9000/secure_products";
+const baseUrl = "http://localhost:9000/products";
+//const baseUrl = "http://localhost:9000/secure_products";
 export default function ListProductsPage() {
 
+    
+
     const [products, setProducts] = useState<Product[]>([]);
+    const [isMessageVisible, setVisible] = useState(false);
     const auth = useSelector((state: AppState) => state.auth);
+    useTitle("ListProduct");
 
 
     useEffect(() => {
@@ -26,10 +32,10 @@ export default function ListProductsPage() {
 
         try {
 
-            if(!auth.isAuthenticated){
-                router.push("/login");
-                return;
-            }
+            // if(!auth.isAuthenticated){
+            //     router.push("/login");
+            //     return;
+            // }
 
             const headers = {Authorization: `Bearer ${auth.accessToken}`};
             const response = await axios.get<Product[]>(baseUrl, {headers});
@@ -43,7 +49,7 @@ export default function ListProductsPage() {
 
     }
 
-    async function deleteProduct(product: Product){
+   const deleteProduct =useCallback( async (product: Product) => {
 
         try {
             
@@ -66,29 +72,42 @@ export default function ListProductsPage() {
             alert("failed to delete record: " + product.id);
         }
 
-    }
+    }, [products])
 
-    function editProduct(product: Product){
+    const editProduct = useCallback( (product: Product)=> {
 
         router.push("/products/" + product.id);
-    }
+    }, []);
+
+    const totalPrice = useMemo( () => {
+
+        console.log("calculating prices");
+        let totalPrice = 0;
+        products.forEach(prod => {
+            if(prod.price){
+                totalPrice += prod.price
+            }
+        })
+        return totalPrice;
+
+    }, [products]);
 
     return (
         <div>
             <h4>List Products</h4>
+
+            <div className="btn btn-success">
+                {"Total Prices: " + totalPrice}
+            </div>
+
+            {isMessageVisible ? <div className="alert alert-info">This is a demo of a data-driven page</div> : null}
+            <br />
+            <button className="btn btn-info" onClick={() => setVisible(p => !p)}>{isMessageVisible? 'Hide' : 'Show'}</button>
+
             <div style={{display: "flex", flexFlow: 'row wrap', justifyContent: 'center'}}>
                 {products.map(product => {
                     return (
-                        <div key={product.id} className={styles.product}>
-                            <p>Id: {product.id}</p>
-                            <p>{product.name}</p>
-                            <p>{product.description}</p>
-                            <p>Price: {product.price}</p>
-                            <div>
-                                <button className="btn btn-warning" onClick={() => {deleteProduct(product)}}>Delete</button>&nbsp;
-                                <button className="btn btn-info" onClick={() => editProduct(product)}>Edit</button>
-                            </div>
-                        </div>
+                       <ProductView key={product.id} product={product} onDelete={deleteProduct} onEdit={editProduct}/>
                     )
                 })}
             </div>

@@ -167,9 +167,66 @@ Redux
 	Reducer: Function
 		- configured with the store
 		- receives the action, based on the action updated the store
+		- Must be synchronous
+	Store: 
+	
+	Action Creators: Helper function to create an action
+	Middleware: intercepts the action before its processed by the reducer
+					- logging, validation
+					- async operations
+							-Libraries: redux thunk, redux saga
+	@redux-toolkit
+			Simplify using redux
+			slice: slice of the data in redux
+				- treat data to be mutable
+				- generate/create a reducer
+				- generate/create the action creators
+	Redux is in memory
+	redux-persist
+		-library to persist the state: localStorage
+			
+	
 		
 react-redux(integration lib)
 	Provider component: integrates the store to the react application
 	useDispatch: return a dispatch function(action)
 	useSelector: subscribe to a selected data from the store
 	useStore: return the store
+	
+React context
+	-This is a low level API
+		- very basic api
+	- An appliation can have mutiple context
+		-every context has its own data
+	- 
+	
+Excercise(Assignment)
+	- Implement Gadget Store and View cart using React context
+	- manage state: useState, useReducer
+	- Use the useReducer hook 
+	
+	
+App Design and Optimization
+	- To create smaller componenets
+		- Maintainabilty, Testing
+		- Optimization
+	-React.memo
+		- Optimization	
+		- Create a memoized copy of the component(caching the generated HTML)
+		- Memo will be invalidated if the component's state or props changes.
+	useCallback
+		- Optimization	
+		- Create a memoized copy of a callback
+		- Used with React.memo
+	useMemo
+		- Optimization	
+		- Create a memoized copy of a value
+	
+	Reuseablity
+		- HOC(Higher order components)
+		- Custom Hooks
+			- Reuse some functionlity across components
+			- A hook that uses/combines react hooks
+		
+
+	

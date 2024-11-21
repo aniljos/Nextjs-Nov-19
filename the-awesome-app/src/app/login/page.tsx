@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
+import { useTitle } from "@/hooks/useTitle";
 
 
 
@@ -15,10 +16,12 @@ function LoginPage(){
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
     const dispatch = useDispatch();
+    useTitle("Login");
 
     useEffect(() => {
 
         nameInputRef.current?.focus();
+        //document.title = document.title + " " + "Login";
 
     }, [])
 

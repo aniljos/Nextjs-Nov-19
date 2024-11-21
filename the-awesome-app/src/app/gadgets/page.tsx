@@ -1,4 +1,5 @@
 'use client'
+import { useTitle } from '@/hooks/useTitle';
 import { CartItem } from '@/model/CartItem';
 import { Product } from '@/model/Product';
 import { addItemToCart } from '@/state/redux/gadgetsReducer';
@@ -13,6 +14,7 @@ function GadgetStore(){
 
     const [products, setProducts] = useState<Product[]>([]);
     const dispatch = useDispatch<AppDispatch>();
+    useTitle("Gadgets Store")
     
     useEffect(() => {
 
@@ -22,6 +24,7 @@ function GadgetStore(){
 
     async function fetchProducts(){
 
+       
         try {  
             const resp = await axios.get<Product[]>(baseUrl);
             setProducts(resp.data);
