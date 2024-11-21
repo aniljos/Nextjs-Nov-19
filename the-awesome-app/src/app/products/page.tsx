@@ -17,6 +17,7 @@ export default function ListProductsPage() {
 
     const [products, setProducts] = useState<Product[]>([]);
     const [isMessageVisible, setVisible] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     const auth = useSelector((state: AppState) => state.auth);
     useTitle("ListProduct");
 
@@ -37,6 +38,9 @@ export default function ListProductsPage() {
             //     return;
             // }
 
+             //delay
+            setLoading(true);
+            await new Promise(resolve => setTimeout(resolve, 5000));
             const headers = {Authorization: `Bearer ${auth.accessToken}`};
             const response = await axios.get<Product[]>(baseUrl, {headers});
             console.log("response", response);
@@ -45,6 +49,9 @@ export default function ListProductsPage() {
         } catch (errorResponse) {
 
             console.log("errorReponse", errorResponse);
+        }
+        finally{
+            setLoading(false);
         }
 
     }
@@ -104,7 +111,12 @@ export default function ListProductsPage() {
             <br />
             <button className="btn btn-info" onClick={() => setVisible(p => !p)}>{isMessageVisible? 'Hide' : 'Show'}</button>
 
+
+            {isLoading? <div className="alert alert-success">Products Loading</div> : null}
+            
             <div style={{display: "flex", flexFlow: 'row wrap', justifyContent: 'center'}}>
+
+
                 {products.map(product => {
                     return (
                        <ProductView key={product.id} product={product} onDelete={deleteProduct} onEdit={editProduct}/>

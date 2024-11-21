@@ -9,7 +9,8 @@ type MessageProps = {
 
 function Message(props: MessageProps){
   
-    
+
+ 
     useEffect(() => {
 
         console.log("Message Component: use effect on component mount");

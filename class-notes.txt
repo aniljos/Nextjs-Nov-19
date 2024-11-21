@@ -211,6 +211,7 @@ App Design and Optimization
 		- Maintainabilty, Testing
 		- Optimization
 	-React.memo
+		- HOC
 		- Optimization	
 		- Create a memoized copy of the component(caching the generated HTML)
 		- Memo will be invalidated if the component's state or props changes.
@@ -228,5 +229,7 @@ App Design and Optimization
 			- Reuse some functionlity across components
 			- A hook that uses/combines react hooks
 		
+
+
 
 	

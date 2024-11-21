@@ -31,6 +31,9 @@ export default function AppBar() {
                         <Link className="nav-link" href="/viewcart">View Cart</Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" href="/customers">Customers</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link className="nav-link" href="/login">Login</Link>
                     </li>
                     <li className="nav-item">

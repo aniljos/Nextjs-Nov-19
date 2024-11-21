@@ -1,5 +1,7 @@
-function AboutPage(){
+async function AboutPage(){
 
+     //delay
+    await new Promise(resolve => setTimeout(resolve, 5000));
     return (
         <div>
             <h4>About</h4>
