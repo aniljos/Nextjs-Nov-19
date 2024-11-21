@@ -4,11 +4,17 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from './page.module.css';
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { AppState } from "@/state/redux/store";
 
-const baseUrl = "http://localhost:9000/products";
+//const baseUrl = "http://localhost:9000/products";
+const baseUrl = "http://localhost:9000/secure_products";
 export default function ListProductsPage() {
 
     const [products, setProducts] = useState<Product[]>([]);
+    const auth = useSelector((state: AppState) => state.auth);
+
+
     useEffect(() => {
 
         fetchProducts()
@@ -20,7 +26,13 @@ export default function ListProductsPage() {
 
         try {
 
-            const response = await axios.get<Product[]>(baseUrl);
+            if(!auth.isAuthenticated){
+                router.push("/login");
+                return;
+            }
+
+            const headers = {Authorization: `Bearer ${auth.accessToken}`};
+            const response = await axios.get<Product[]>(baseUrl, {headers});
             console.log("response", response);
             setProducts(response.data);
 

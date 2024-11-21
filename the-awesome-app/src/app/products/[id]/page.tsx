@@ -31,12 +31,12 @@ export default function EditProduct(){
 
     function handleNameChange(evt: ChangeEvent<HTMLInputElement>){
 
-        const value = evt.target.value;
-        const copy_of_product = {...product};
-        copy_of_product.name = value;
-        setProduct(copy_of_product);
+        // const value = evt.target.value;
+        // const copy_of_product = {...product};
+        // copy_of_product.name = value;
+        // setProduct(copy_of_product);
 
-        //setProduct({...product, name: evt.target.value})
+        setProduct({...product, name: evt.target.value});
     }
 
     async function save(e: MouseEvent){

@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 
 
@@ -13,6 +14,7 @@ function LoginPage(){
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
+    const dispatch = useDispatch();
 
     useEffect(() => {
 
@@ -37,13 +39,20 @@ function LoginPage(){
 
             try {
                 
-                const response = await axios.post(loginUrl, {name, password});
+                const response = await axios.post<{accessToken: string, refreshToken: string}>(loginUrl, {name, password});
                 console.log("response", response);
-                router.push("/");
+                dispatch({type:"logged_in", payload: {
+                    isAuthenticated: true,
+                    accessToken: response.data.accessToken,
+                    refreshToken: response.data.refreshToken,
+                    userName: name
+                }})
+                router.push("/products");
 
             } catch (errorResponse) {
                 console.log("errorResponse", errorResponse);
                 setErrorMessage("Invalid credentials");
+                dispatch({type: "logout"});
             }
 
 

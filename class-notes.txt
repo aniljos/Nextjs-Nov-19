@@ -168,5 +168,8 @@ Redux
 		- configured with the store
 		- receives the action, based on the action updated the store
 		
-react-redux(intgration lib)
+react-redux(integration lib)
 	Provider component: integrates the store to the react application
+	useDispatch: return a dispatch function(action)
+	useSelector: subscribe to a selected data from the store
+	useStore: return the store
