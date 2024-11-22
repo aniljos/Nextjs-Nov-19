@@ -4,6 +4,7 @@ import "./globals.css";
 import ReduxProvider from "@/state/redux/ReduxProvider";
 import AppBar from "@/components/AppBar";
 import AppThemeContextProvider from "@/state/context/AppThemeContext";
+import GadgetsContextProvider from "@/state/context/GadgetsContext";
 
 
 const geistSans = localFont({
@@ -36,12 +37,14 @@ export default function RootLayout({
         <ReduxProvider>
           {/* <AppThemeContext.Provider value={initialThemeState}> */}
           <AppThemeContextProvider>
+            <GadgetsContextProvider>
             <div className="container">
               <AppBar />
               <main>
                 {children}
               </main>
             </div>
+            </GadgetsContextProvider>
           </AppThemeContextProvider>
           {/* </AppThemeContext.Provider> */}
         </ReduxProvider>

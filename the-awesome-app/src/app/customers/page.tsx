@@ -5,7 +5,7 @@ import Link from "next/link";
 export default async function ListCustomers(){
 
     //delay
-    //await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise(resolve => setTimeout(resolve, 5000));
     //api call
     const url = "http://localhost:9000/customers";
     const response = await axios.get<Customer[]>(url);
