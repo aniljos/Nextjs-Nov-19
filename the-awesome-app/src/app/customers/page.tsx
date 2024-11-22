@@ -35,7 +35,7 @@ type CustomerViewProps = {
     interval: number
 }
 
-async function CustomerView(props: CustomerViewProps){
+export async function CustomerView(props: CustomerViewProps){
 
     //delay
     await new Promise(resolve => setTimeout(resolve, props.interval));
