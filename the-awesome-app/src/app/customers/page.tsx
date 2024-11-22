@@ -1,17 +1,54 @@
 import { Customer } from "@/model/Customer";
-import axios from "axios"
+import { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
+
+
+export const metadata: Metadata = {
+    title: "Next App Customers",
+    
+};
+
 
 export default async function ListCustomers(){
 
     //delay
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    return (
+        <div>
+            <h4>List of Customers</h4>
+            <p>This is an example streaming and suspense</p>
+
+            <Suspense fallback={<div className="alert alert-info">Loading customers #1</div>}>
+                <CustomerView interval={5000}/>
+            </Suspense>
+           
+            <Suspense fallback={<div className="alert alert-warning">Loading customers #2</div>}>
+                <CustomerView interval={10000}/>
+            </Suspense>
+        </div>
+    )
+}
+
+type CustomerViewProps = {
+    interval: number
+}
+
+async function CustomerView(props: CustomerViewProps){
+
+    //delay
+    await new Promise(resolve => setTimeout(resolve, props.interval));
     //api call
     const url = "http://localhost:9000/customers";
-    const response = await axios.get<Customer[]>(url);
-    const customers = response.data;
-    console.log("customers", customers);
+    //const response = await axios.get<Customer[]>(url);
+    //const customers = response.data;
+    const response = await fetch(url, {cache: 'no-store'});
+    const customers = await response.json() as Customer[];
 
+
+
+    console.log("customers", customers);
 
     return (
         <div>

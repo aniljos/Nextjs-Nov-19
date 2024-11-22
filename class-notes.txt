@@ -223,12 +223,25 @@ App Design and Optimization
 	useMemo
 		- Optimization	
 		- Create a memoized copy of a value
-	
+	Virtual DOM
+		- Rerender, this is optimized by the virtual
 	Reuseablity
 		- HOC(Higher order components)
 		- Custom Hooks
 			- Reuse some functionlity across components
 			- A hook that uses/combines react hooks
+			
+SSG(build)
+	- No data fetched
+	- Data is fetched but not dynamically its still an SSG
+	- Data is fetched dynamically, and generateStaticParams is implemented then its SSG
+	
+SSR(runtime)
+	- Data is fetched dynamically, its SSR
+	- Data fetch which is static(not dynamically constructed URL) but the caching is disbaled, its SSR
+	
+	
+
 		
 
 
